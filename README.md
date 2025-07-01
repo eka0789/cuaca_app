@@ -1,6 +1,6 @@
-# Cuaca Ceria 🌦️
+# Cuaca Ceria App 🌦️
 
-**Cuaca Ceria** adalah aplikasi cuaca yang dirancang khusus untuk anak-anak. Dengan tampilan yang penuh warna dan ilustrasi lucu, anak-anak dapat belajar tentang cuaca dengan cara yang menyenangkan!
+**Cuaca Ceria App** adalah aplikasi cuaca yang dirancang khusus untuk anak-anak. Dengan tampilan yang penuh warna dan ilustrasi lucu, anak-anak dapat belajar tentang cuaca dengan cara yang menyenangkan!
 
 ## Fitur Utama
 
