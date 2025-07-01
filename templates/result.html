@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      .weather-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 30px;
+        box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+        padding: 2.5rem 2rem;
+        max-width: 420px;
+        margin: 2rem auto;
+        position: relative;
+        z-index: 2;
+        animation: bounceIn 1s;
+      }
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0.7);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .weather-icon {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 1rem;
+        animation: float 2.5s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-18px);
+        }
+      }
+      .weather-details h2 {
+        font-size: 2.7rem;
+        font-weight: 700;
+        color: #ff4e50;
+        text-shadow: 1px 2px 0 #fff176;
+      }
+      .weather-details h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1rem;
+        text-shadow: 1px 1px 0 #fffde7;
+      }
+      .weather-details p {
+        font-size: 1.1rem;
+        color: #555;
+      }
+      .btn-primary {
+        background: linear-gradient(90deg, #f9d423 0%, #ff4e50 100%);
+        border: none;
+        font-weight: bold;
+        font-size: 1.1rem;
+        border-radius: 20px;
+        transition: transform 0.2s;
+      }
+      .btn-primary:hover {
+        transform: scale(1.08) rotate(-2deg);
+        background: linear-gradient(90deg, #ff4e50 0%, #f9d423 100%);
+      }
+      /* Animated clouds */
+      .cloud {
+        position: absolute;
+        top: 30px;
+        left: -120px;
+        width: 100px;
+        height: 60px;
+        background: #fff;
+        border-radius: 50px;
+        box-shadow: 60px 0 0 0 #fff, 30px 20px 0 0 #fff, 80px 20px 0 0 #fff;
+        opacity: 0.7;
+        animation: cloudMove 18s linear infinite;
+        z-index: 1;
+      }
+      .cloud2 {
+        top: 80px;
+        left: -180px;
+        width: 70px;
+        height: 40px;
+        opacity: 0.5;
+        animation-duration: 25s;
+      }
+      @keyframes cloudMove {
+        0% {
+          left: -120px;
+        }
+        100% {
+          left: 110%;
+        }
+      }
+      /* Animated sun */
+      .sun {
+        position: absolute;
+        top: -40px;
+        right: 30px;
+        width: 70px;
+        height: 70px;
+        background: #fff176;
+        border-radius: 50%;
+        box-shadow: 0 0 40px 10px #fffde7;
+        z-index: 1;
+        animation: sunSpin 8s linear infinite;
+      }
+      @keyframes sunSpin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      /* Animated rainbow */
+      .rainbow {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 180px;
+        height: 90px;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .rainbow-arc {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 90px 90px 0 0;
+        border-bottom: none;
+        border-style: solid;
+        border-width: 12px;
+        border-color: transparent;
+        animation: rainbowAppear 2s;
+      }
+      .rainbow-arc1 {
+        border-top-color: #ff4e50;
+        top: 0;
+        left: 0;
+      }
+      .rainbow-arc2 {
+        border-top-color: #f9d423;
+        top: 8px;
+        left: 0;
+        width: 160px;
+        height: 80px;
+      }
+      .rainbow-arc3 {
+        border-top-color: #74ebd5;
+        top: 16px;
+        left: 0;
+        width: 140px;
+        height: 70px;
+      }
+      .rainbow-arc4 {
+        border-top-color: #acb6e5;
+        top: 24px;
+        left: 0;
+        width: 120px;
+        height: 60px;
+      }
+      @keyframes rainbowAppear {
+        0% {
+          opacity: 0;
+          transform: scaleX(0.5);
+        }
+        100% {
+          opacity: 1;
+          transform: scaleX(1);
+        }
+      }
+      /* Responsive */
+      @media (max-width: 576px) {
+        .weather-card {
+          padding: 1.5rem 0.5rem;
+        }
+        .weather-details h2 {
+          font-size: 2rem;
+        }
+        .sun {
+          width: 50px;
+          height: 50px;
+        }
+        .rainbow {
+          width: 120px;
+          height: 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="container d-flex flex-column justify-content-center align-items-center min-vh-100"
+      style="position: relative"
+    >
+      <div class="cloud"></div>
+      <div class="cloud cloud2"></div>
+      <div class="sun"></div>
+      <div class="weather-card text-center">
+        <h1 class="mb-4" style="font-weight: 700; color: #ff4e50">
+          <span style="font-size: 2rem">&#127774;</span>
+          Weather in {{ weather.city }}
+        </h1>
+        <img
+          class="weather-icon"
+          src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png"
+          alt="weather icon"
+          id="mainWeatherIcon"
+        />
+        <div class="weather-details">
+          <h3>{{ weather.description.title() }}</h3>
+          <h2>{{ weather.temperature }}°C</h2>
+          <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
+          <p><strong>Wind Speed:</strong> {{ weather.wind_speed }} m/s</p>
+        </div>
+        <a href="/" class="btn btn-primary mt-4 px-4 py-2">Search Again</a>
+        <div class="rainbow">
+          <div class="rainbow-arc rainbow-arc1"></div>
+          <div class="rainbow-arc rainbow-arc2"></div>
+          <div class="rainbow-arc rainbow-arc3"></div>
+          <div class="rainbow-arc rainbow-arc4"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Interaktif: Weather icon melompat saat diklik
+      document
+        .getElementById("mainWeatherIcon")
+        .addEventListener("click", function () {
+          this.style.animation = "jump 0.5s";
+          setTimeout(() => {
+            this.style.animation = "float 2.5s ease-in-out infinite";
+          }, 500);
+        });
+      // Jump animation
+      const style = document.createElement("style");
+      style.innerHTML = `
+                @keyframes jump {
+                    0% { transform: translateY(0);}
+                    30% { transform: translateY(-40px);}
+                    60% { transform: translateY(-20px);}
+                    100% { transform: translateY(0);}
+                }
+            `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>
